@@ -1,6 +1,6 @@
 <?php
 
-use App\Kernel;
+use Telegram\Bot\Skeleton\Kernel;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 

@@ -10,17 +10,23 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false
+
+    Telegram\Bot\Skeleton\Application\Converter\BlacklistParametersConverter:
+        class: Telegram\Bot\Skeleton\Application\Converter\BlacklistParametersConverter
+        tags:
+            - { name: "blacklistParametersConverter", priority: -1, converter: BlacklistParametersConverter }
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    App\:
+    Telegram\Bot\Skeleton\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    App\Controller\:
-        resource: '../src/Controller'
+    Telegram\Bot\Skeleton\Application\Controller\:
+        resource: '../src/Application/Controller'
         tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
