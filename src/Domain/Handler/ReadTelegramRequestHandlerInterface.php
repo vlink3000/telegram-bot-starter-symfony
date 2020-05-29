@@ -5,7 +5,7 @@ namespace Telegram\Bot\Skeleton\Domain\Handler;
 use Symfony\Component\Mime\Exception\InvalidArgumentException;
 use Telegram\Bot\Skeleton\Domain\Dto\UserDto;
 
-interface AddUserToBlacklistHandlerInterface
+interface ReadTelegramRequestHandlerInterface
 {
     /**
      * @param UserDto $user

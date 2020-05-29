@@ -5,11 +5,28 @@ namespace Telegram\Bot\Skeleton\Application\Converter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\Mime\Exception\InvalidArgumentException;
 use Telegram\Bot\Skeleton\Domain\Dto\UserDto;
+use Telegram\Bot\Skeleton\Domain\Factory\UserFactory;
 
-class BlacklistParametersConverter implements ParamConverterInterface
+class TelegramParametersConverter implements ParamConverterInterface
 {
+    /**
+     * @var UserFactory
+     */
+    private $userFactory;
+
+    /**
+     * BlacklistParametersConverter constructor.
+     *
+     * @param $userFactory
+     */
+    public function __construct(UserFactory $userFactory)
+    {
+        $this->userFactory = $userFactory;
+    }
+
     /**
      * @param Request $request
      * @param ParamConverter $configuration
@@ -20,9 +37,15 @@ class BlacklistParametersConverter implements ParamConverterInterface
     {
         $name = $configuration->getName();
 
+        try {
+            $userDto = $this->userFactory->createFromRequest($request);
+        } catch (UnprocessableEntityHttpException $e) {
+            throw new InvalidArgumentException($e->getMessage());
+        }
+
         $request->attributes->set(
             $name,
-            new UserDto('test message')
+            $userDto
         );
 
         return true;
