@@ -25,6 +25,11 @@ class Kernel extends BaseKernel
         }
     }
 
+    public function getCacheDir()
+    {
+        return $this->getProjectDir().'/var/'.$this->environment.'/cache';
+    }
+
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->addResource(new FileResource($this->getProjectDir().'/config/bundles.php'));

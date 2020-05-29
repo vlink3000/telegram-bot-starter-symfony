@@ -24,16 +24,23 @@ services:
         resource: '../src/Application/*'
     Telegram\Bot\Skeleton\Domain\:
         resource: '../src/Domain/*'
+    Telegram\Bot\Skeleton\Infrastructure\:
+        resource: '../src/Infrastructure/*'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     Telegram\Bot\Skeleton\Application\Controller\:
         resource: '../src/Application/Controller'
         tags: ['controller.service_arguments']
-
     Telegram\Bot\Skeleton\Application\Validator\UserValidatorInterface:
         class: Telegram\Bot\Skeleton\Application\Validator\UserValidator
-
     Telegram\Bot\Skeleton\Domain\Factory\UserFactory:
         arguments:
           - '@Telegram\Bot\Skeleton\Application\Validator\UserValidatorInterface'
+
+    Illuminate.Database.Capsule.Manager:
+        class: Illuminate\Database\Capsule\Manager
+        public: false
+    Telegram\Bot\Skeleton\Infrastructure\DatabaseConnector:
+        arguments: ['@Illuminate.Database.Capsule.Manager']
+        public: true

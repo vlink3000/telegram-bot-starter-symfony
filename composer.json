@@ -5,8 +5,9 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "illuminate/database": "^7.13",
         "sensio/framework-extra-bundle": "^5.5",
-        "symfony/console": "5.0.*",
+        "symfony/console": "^5.0",
         "symfony/dotenv": "5.0.*",
         "symfony/framework-bundle": "5.0.*",
         "symfony/yaml": "^5.0"
@@ -27,5 +28,8 @@
     },
     "extra": {
         "src-dir": "src/Application"
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.19"
     }
 }
