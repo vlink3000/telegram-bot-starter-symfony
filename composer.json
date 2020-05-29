@@ -8,9 +8,8 @@
         "sensio/framework-extra-bundle": "^5.5",
         "symfony/console": "5.0.*",
         "symfony/dotenv": "5.0.*",
-        "symfony/framework-bundle": "5.0.*"
-    },
-    "require-dev": {
+        "symfony/framework-bundle": "5.0.*",
+        "symfony/yaml": "^5.0"
     },
     "config": {
         "preferred-install": {
@@ -18,33 +17,15 @@
         },
         "sort-packages": true
     },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
     "autoload": {
         "psr-4": {
             "Telegram\\Bot\\Skeleton\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Telegram\\Bot\\Skeleton\\Tests\\": "tests/"
-        }
-    },
-    "replace": {
-        "paragonie/random_compat": "2.*",
-        "symfony/polyfill-ctype": "*",
-        "symfony/polyfill-iconv": "*",
-        "symfony/polyfill-php72": "*",
-        "symfony/polyfill-php71": "*",
-        "symfony/polyfill-php70": "*",
-        "symfony/polyfill-php56": "*"
-    },
-    "conflict": {
-        "symfony/symfony": "*"
-    },
     "extra": {
-        "symfony": {
-            "allow-contrib": false,
-            "require": "5.0.*"
-        },
-        "src-dir": "Telegram/Bot/Skeleton"
+        "src-dir": "src/Application"
     }
 }
