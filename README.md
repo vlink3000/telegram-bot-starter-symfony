@@ -35,3 +35,27 @@ COMMIT;
 
 #### 2. Use ```config/database.yaml.example```, remove ```.example``` and add your credentials
 
+#### 3. Endpoints
+    [POST] localhost:8000/api/v1/telegram
+##### Example body
+```json
+{
+   "update_id":529806502,
+   "message":{
+      "message_id":3306,
+      "from":{
+         "id":1278424391,
+         "is_bot":false,
+         "first_name":"vlink3000",
+         "language_code":"en"
+      },
+      "chat":{
+         "id":1278424391,
+         "first_name":"vlink3000",
+         "type":"private"
+      },
+      "date":1590060660,
+      "text":"Hello World!"
+   }
+}
+```
