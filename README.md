@@ -1,6 +1,6 @@
-# How you can start?
+## How you can start?
 
-### 1. Create DB and run SQL queries, code bellow
+#### 1. Create DB and run SQL queries, code bellow
 ```sql
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -33,5 +33,5 @@ COMMIT;
 
 ```
 
-### 2. Use ```config/database.yaml.example```, remove ```.example``` and add your credentials
+#### 2. Use ```config/database.yaml.example```, remove ```.example``` and add your credentials
 
