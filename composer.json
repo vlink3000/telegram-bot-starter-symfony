@@ -27,8 +27,5 @@
     },
     "extra": {
         "src-dir": "src/Application"
-    },
-    "require-dev": {
-        "symfony/maker-bundle": "^1.19"
     }
 }
