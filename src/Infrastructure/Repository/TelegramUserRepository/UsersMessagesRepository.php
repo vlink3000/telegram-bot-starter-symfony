@@ -9,6 +9,7 @@ use Telegram\Bot\Skeleton\Infrastructure\DatabaseConnector;
 class UsersMessagesRepository implements UsersMessagesRepositoryInterface
 {
     private const TABLE_USERS = 'users';
+    private const TABLE_LOGS= 'logs';
 
     private $connector;
 
@@ -27,7 +28,21 @@ class UsersMessagesRepository implements UsersMessagesRepositoryInterface
      */
     public function create(UserDto $userDto): void
     {
-        //$connection = $this->connector->getConnection();
-        //$connection->table(self::TABLE_USERS);
+        $statement = $this->connector->getConnection();
+
+        try {
+            $statement->table(self::TABLE_USERS)->updateOrInsert(['user_telegram_id' => $userDto->getUserTelegramId()], [
+                    'user_name' => $userDto->getUserName(),
+                    'message' => $userDto->getMessage(),
+                    'language_code' => $userDto->getLanguageCode(),
+                    'last_request_at' => $userDto->getLastRequestAt()
+                ]
+            );
+        } catch (\PDOException | \Exception $exception) {
+            $statement->table(self::TABLE_LOGS)->insert([
+                'message' => $exception->getMessage(),
+                'time' => time()
+            ]);
+        }
     }
 }
