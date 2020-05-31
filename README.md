@@ -33,11 +33,12 @@ COMMIT;
 
 ```
 
-#### 2. Use ```config/database.yaml.example```, remove ```.example``` and add your credentials
+#### 2. Database configuration
+ - Use ```config/database.yaml.example```, remove ```.example``` and add your credentials
 
 #### 3. Endpoints
     [POST] localhost:8000/api/v1/telegram
-##### Example body
+-   Example body
 ```json
 {
    "update_id":529806502,
