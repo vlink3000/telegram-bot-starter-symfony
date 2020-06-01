@@ -60,3 +60,5 @@ COMMIT;
    }
 }
 ```
+#### 4. Unit tests
+    php vendor/bin/codecept run unit --coverage-html
