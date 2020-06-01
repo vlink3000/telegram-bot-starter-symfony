@@ -27,5 +27,10 @@
     },
     "extra": {
         "src-dir": "src/Application"
+    },
+    "scripts": {
+        "test": [
+            "phpunit test"
+        ]
     }
 }
