@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
-use Symfony\Component\Mime\Exception\InvalidArgumentException;
 use Telegram\Bot\Skeleton\Domain\Dto\UserDto;
 use Telegram\Bot\Skeleton\Domain\Factory\UserFactory;
 
@@ -30,7 +29,7 @@ class TelegramParametersConverter implements ParamConverterInterface
     /**
      * @param Request $request
      * @param ParamConverter $configuration
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @return bool
      */
     public function apply(Request $request, ParamConverter $configuration): bool
@@ -40,7 +39,7 @@ class TelegramParametersConverter implements ParamConverterInterface
         try {
             $userDto = $this->userFactory->createFromRequest($request);
         } catch (UnprocessableEntityHttpException $e) {
-            throw new InvalidArgumentException($e->getMessage());
+            throw new UnprocessableEntityHttpException($e->getMessage());
         }
 
         $request->attributes->set(

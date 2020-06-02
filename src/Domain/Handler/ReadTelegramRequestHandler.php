@@ -2,7 +2,6 @@
 
 namespace Telegram\Bot\Skeleton\Domain\Handler;
 
-use Symfony\Component\Mime\Exception\InvalidArgumentException;
 use Telegram\Bot\Skeleton\Domain\Dto\UserDto;
 use Telegram\Bot\Skeleton\Domain\Repository\UsersMessagesRepositoryInterface;
 
@@ -24,7 +23,7 @@ class ReadTelegramRequestHandler implements ReadTelegramRequestHandlerInterface
     /**
      * @param UserDto $userDto
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @return void
      */
     public function __invoke(UserDto $userDto): void
