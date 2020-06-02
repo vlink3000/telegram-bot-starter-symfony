@@ -4,6 +4,7 @@ namespace Telegram\Bot\Skeleton\Application\Validator;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
+use Telegram\Bot\Skeleton\Library\Exception\Web\ValidationException;
 
 class UserValidator implements UserValidatorInterface
 {
@@ -26,16 +27,15 @@ class UserValidator implements UserValidatorInterface
         try{
             $userData = $this->toArray($request);
         } catch (\InvalidArgumentException $exception){
-            throw new UnprocessableEntityHttpException($exception->getMessage());
+            throw new ValidationException('Invalid structure of user message.');
         }
 
         foreach ($keys as $key) {
             if (!array_key_exists($key, $userData)) {
-                $userData[$key] = "";
+                throw new ValidationException('Invalid structure of user message.');
             }
         }
 
-//        var_dump($userData);die();
         return $userData;
     }
 
@@ -61,6 +61,6 @@ class UserValidator implements UserValidatorInterface
             return array_merge($request['message']['from'], $message);
         }
 
-        throw new \InvalidArgumentException('Invalid structure of user message.');
+        throw new \InvalidArgumentException();
     }
 }

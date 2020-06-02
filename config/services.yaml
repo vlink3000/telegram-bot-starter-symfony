@@ -26,6 +26,8 @@ services:
         resource: '../src/Domain/*'
     Telegram\Bot\Skeleton\Infrastructure\:
         resource: '../src/Infrastructure/*'
+    Telegram\Bot\Skeleton\Library\:
+        resource: '../src/Library/*'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class

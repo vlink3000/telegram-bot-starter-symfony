@@ -34,8 +34,6 @@ class TelegramParametersConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration): bool
     {
-        $name = $configuration->getName();
-
         try {
             $userDto = $this->userFactory->createFromRequest($request);
         } catch (UnprocessableEntityHttpException $e) {
@@ -43,7 +41,7 @@ class TelegramParametersConverter implements ParamConverterInterface
         }
 
         $request->attributes->set(
-            $name,
+            $configuration->getName(),
             $userDto
         );
 

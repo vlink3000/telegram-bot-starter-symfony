@@ -40,7 +40,6 @@ class SubscriptionParametersConverterTest extends TestCase
         $this->validator = $this->prophesize(UserValidatorInterface::class);
     }
 
-
     private function getTestedObject(): TelegramParametersConverter
     {
         return new TelegramParametersConverter(
@@ -56,39 +55,18 @@ class SubscriptionParametersConverterTest extends TestCase
         $request = $this->prophesize(Request::class);
         $request->attributes = new ParameterBag([]);
 
-        $this->userFactory->createFromRequest($request);
-
-        $this->validator->validateUserRequest($request);
-
+        $this->userFactory->createFromRequest($request)->willReturn($this->getUserDtoMock());
 
         $this->getTestedObject()->apply($request->reveal(), $this->configuration->reveal());
 
+        $this->assertTrue($this->getTestedObject()->apply($request->reveal(), $this->configuration->reveal()));
+        $this->assertTrue($request->attributes->has($paramName));
+
+        $this->assertEquals(
+            $this->getUserDtoMock(),
+            $request->attributes->get($paramName)
+        );
     }
-
-//    /**
-//     * @expectedException Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
-//     */
-//    public function testApplyMethodShouldThrowUnprocessableEntityHttpException(): void
-//    {
-//        $paramName = 'testParam';
-//        $this->configuration->getName()->willReturn($paramName)->shouldBeCalled();
-//
-//        $request = $this->prophesize(Request::class);
-//        $request->attributes = new ParameterBag([]);
-//
-//        $this->userFactory->createFromRequest($request)->willReturn($this->getUserDtoMock());
-//
-//        $this->getTestedObject()->apply($request->reveal(), $this->configuration->reveal());
-//
-//        $this->assertTrue($this->getTestedObject()->apply($request->reveal(), $this->configuration->reveal()));
-//        $this->assertTrue($request->attributes->has($paramName));
-//
-//        $this->assertEquals(
-//            $this->getUserDtoMock(),
-//            $request->attributes->get($paramName)
-//        );
-//    }
-
 
     public function testShouldReturnUserDtoObject(): void
     {

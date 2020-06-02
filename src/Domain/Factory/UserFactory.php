@@ -2,10 +2,10 @@
 
 namespace Telegram\Bot\Skeleton\Domain\Factory;
 
-use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Telegram\Bot\Skeleton\Application\Validator\UserValidatorInterface;
 use Telegram\Bot\Skeleton\Domain\Dto\UserDto;
 use Symfony\Component\HttpFoundation\Request;
+use Telegram\Bot\Skeleton\Library\Exception\Web\ValidationException;
 
 class UserFactory
 {
@@ -27,7 +27,7 @@ class UserFactory
     /**
      * @param Request $request
      *
-     * @throws UnprocessableEntityHttpException
+     * @throws ValidationException
      * @return UserDto
      */
     public function createFromRequest(Request $request): UserDto
