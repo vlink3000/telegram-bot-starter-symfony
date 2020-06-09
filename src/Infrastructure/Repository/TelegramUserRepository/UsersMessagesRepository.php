@@ -3,6 +3,7 @@
 namespace Telegram\Bot\Skeleton\Infrastructure\Repository\TelegramUserRepository;
 
 use Telegram\Bot\Skeleton\Domain\Dto\UserDto;
+use Telegram\Bot\Skeleton\Domain\Exception\RepositoryException;
 use Telegram\Bot\Skeleton\Domain\Repository\UsersMessagesRepositoryInterface;
 use Telegram\Bot\Skeleton\Infrastructure\DatabaseConnector;
 
@@ -43,6 +44,7 @@ class UsersMessagesRepository implements UsersMessagesRepositoryInterface
                 'message' => $exception->getMessage(),
                 'time' => time()
             ]);
+            throw new RepositoryException('Repository connection failed', $exception);
         }
     }
 }

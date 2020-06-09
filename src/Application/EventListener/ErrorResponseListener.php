@@ -2,6 +2,7 @@
 
 namespace Telegram\Bot\Skeleton\Application\EventListener;
 
+use Telegram\Bot\Skeleton\Domain\Exception\RepositoryException;
 use Telegram\Bot\Skeleton\Library\Exception\Web\ValidationException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +27,9 @@ class ErrorResponseListener implements EventSubscriberInterface
         switch (true) {
             case $exception instanceof ValidationException:
                 $responseStatus = Response::HTTP_UNPROCESSABLE_ENTITY;
+                break;
+            case $exception instanceof RepositoryException:
+                $responseStatus = Response::HTTP_BAD_GATEWAY;
                 break;
             default:
                 //handle only defined exceptions - the rest is handled by ServiceExceptionHandler

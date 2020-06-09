@@ -1,15 +1,10 @@
-<?php
-/**
- * Created by IntelliJ IDEA.
- * User: khorov01
- * Date: 02/06/2020
- * Time: 19:58
- */
+<?php declare(strict_types=1);
 
 namespace Telegram\Bot\Skeleton\Domain\Exception;
 
+use Telegram\Bot\Skeleton\Library\Exception\TelegramBotRuntimeException;
 
-class RepositoryException
+class RepositoryException extends TelegramBotRuntimeException
 {
 
 }
