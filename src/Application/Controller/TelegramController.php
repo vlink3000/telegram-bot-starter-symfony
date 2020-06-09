@@ -24,7 +24,7 @@ class TelegramController
     /**
      * @Route("/api/v1/telegram", methods={"POST"})
      * @ParamConverter(
-     *     name="telegramParametersConverter",
+     *     name="userDto",
      *     class="Telegram\Bot\Skeleton\Domain\Dto\UserDto"
      * )
      * @param UserDto $userDto
