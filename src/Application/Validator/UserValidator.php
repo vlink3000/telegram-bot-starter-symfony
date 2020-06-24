@@ -3,6 +3,7 @@
 namespace Telegram\Bot\Skeleton\Application\Validator;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Yaml\Yaml;
 use Telegram\Bot\Skeleton\Library\Exception\Web\ValidationException;
 
 class UserValidator implements UserValidatorInterface
@@ -15,13 +16,7 @@ class UserValidator implements UserValidatorInterface
      */
     public function validateUserRequest(Request $request): array
     {
-        $keys = [
-            'id',
-            'first_name',
-            'message',
-            'language_code',
-            'last_request_at'
-        ];
+        $keys = $this->getValidationKeys();
 
         $requestContent = json_decode($request->getContent(), true);
         $userData = $this->toFlattedArray($requestContent);
@@ -42,7 +37,7 @@ class UserValidator implements UserValidatorInterface
      */
     private function toFlattedArray(array $requestContent): array
     {
-        $flattedArray = array();
+        $flattedArray = [];
 
         foreach ($requestContent as $key => $value) {
             if (is_array($value)){
@@ -53,5 +48,13 @@ class UserValidator implements UserValidatorInterface
         }
 
         return $flattedArray;
+    }
+
+    /**
+     * @return array
+     */
+    private function getValidationKeys(): array
+    {
+        return Yaml::parseFile(dirname(__DIR__) . '/../../config/validation.yaml');
     }
 }
